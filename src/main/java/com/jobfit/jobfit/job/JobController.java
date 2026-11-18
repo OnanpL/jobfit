@@ -1,0 +1,29 @@
+package com.jobfit.jobfit.job;
+
+import java.util.List;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/jobs")
+public class JobController {
+    
+    private final JobService jobService;
+    
+    public JobController(JobService jobService) {
+        this.jobService = jobService;
+    }
+    
+    @GetMapping
+    public List<Job> getJobs(){
+        return jobService.getAllJobs();
+    }
+    
+    @GetMapping("/{id}")
+    public Job getJob(@PathVariable("id") Long id){
+        return jobService.getJob(id);
+    }
+}
